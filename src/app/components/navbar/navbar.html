@@ -1,0 +1,27 @@
+<header>
+  <div class="nav container">
+    <a routerLink="/" class="logo"><i class="bxr bx-home-alt"></i>R State</a>
+
+    @if (mode() === 'home') {
+      <input type="checkbox" id="menu" #menu>
+      <label for="menu"><i class="bxr bx-menu" id="menu-icon"></i></label>
+
+      <ul class="navbar">
+        <li><a routerLink="/" fragment="home" (click)="menu.checked = false">Home</a></li>
+        <li><a routerLink="/" fragment="about" (click)="menu.checked = false">About Us</a></li>
+        <li><a routerLink="/" fragment="sales" (click)="menu.checked = false">Sales</a></li>
+        <li><a routerLink="/" fragment="properties" (click)="menu.checked = false">Properties</a></li>
+      </ul>
+    }
+
+    @if (mode() === 'login') {
+      <a routerLink="/sign-up" class="btn">Sign Up</a>
+    } @else if (mode() === 'signup') {
+      <a routerLink="/login" class="btn">Log in</a>
+    } @else if (auth.user()) {
+      <button class="btn" (click)="logout()">Log out</button>
+    } @else {
+      <a routerLink="/login" class="btn">Log in</a>
+    }
+  </div>
+</header>

@@ -1,0 +1,61 @@
+<app-navbar mode="home" />
+
+<section class="details container">
+  <a routerLink="/" fragment="properties" class="back">
+    <i class="bx bx-arrow-left-stroke"></i> Back to properties
+  </a>
+
+  @if (loading()) {
+    <p class="status">Loading property...</p>
+  } @else if (!house()) {
+    <p class="status">Sorry, we could not find that property.</p>
+  } @else {
+    <div class="top">
+      <div>
+        <h2>{{ house()!.name }}</h2>
+        <p class="location"><i class="bx bx-map"></i> {{ house()!.location }}</p>
+      </div>
+      <h3 class="price">KES {{ house()!.price | number }}</h3>
+    </div>
+
+    <div class="viewer">
+      <img class="backdrop" [src]="currentSlide().url" alt="" />
+      <img class="main" [src]="currentSlide().url" [alt]="currentSlide().caption" />
+
+      @if (slides().length > 1) {
+        <button class="arrow left" (click)="prev()" aria-label="Previous photo">
+          <i class="bx bx-chevron-left"></i>
+        </button>
+        <button class="arrow right" (click)="next()" aria-label="Next photo">
+          <i class="bx bx-chevron-right"></i>
+        </button>
+      }
+
+      <span class="counter">{{ current() + 1 }} / {{ slides().length }}</span>
+    </div>
+
+    <p class="caption">{{ currentSlide().caption }}</p>
+
+    @if (slides().length > 1) {
+      <div class="thumbs">
+        @for (slide of slides(); track $index) {
+          <img
+            [src]="slide.url"
+            [alt]="slide.caption"
+            [class.active]="$index === current()"
+            (click)="select($index)"
+          />
+        }
+      </div>
+    }
+
+    <div class="info">
+      <span><i class="bx bx-bed"></i> {{ house()!.bedrooms }} Bedrooms</span>
+      <span><i class="bx bx-bath"></i> {{ house()!.bathrooms }} Bathrooms</span>
+    </div>
+
+    <a routerLink="/" fragment="properties" class="btn">Interested? Send us an inquiry</a>
+  }
+</section>
+
+<app-footer />

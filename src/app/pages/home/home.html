@@ -1,0 +1,83 @@
+<app-navbar mode="home" />
+
+<section class="home container" id="home">
+  <div class="home-text">
+    <h1>Find Your Next <br>Perfect Place to <br> Live.</h1>
+    <a routerLink="/sign-up" class="btn">Sign Up</a>
+  </div>
+</section>
+
+<section class="about container" id="about">
+  <div class="about-img">
+    <img src="images/about.webp" alt="">
+  </div>
+
+  <div class="about-text">
+    <span>About Us</span>
+    <h2>We Provide The Best <br> Property For You</h2>
+    <p>We are a leading real estate company dedicated to helping you find your dream home.</p>
+    <p>With a wide range of properties and a team of experienced professionals, we make the process of buying or renting a home seamless and stress-free.</p>
+    <p>Our commitment to excellence and customer satisfaction sets us apart in the industry.</p>
+    <a href="#" class="btn">Learn More</a>
+  </div>
+</section>
+
+<section class="sales container" id="sales">
+  <div class="box">
+    <i class="bx bx-user"></i>
+    <h3>Make Your Dream True</h3>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, id.</p>
+  </div>
+
+  <div class="box">
+    <i class="bx bx-desktop"></i>
+    <h3>Start your Membership</h3>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, id.</p>
+  </div>
+
+  <div class="box">
+    <i class="bx bx-home-alt"></i>
+    <h3>Enjoy Your New Home</h3>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, id.</p>
+  </div>
+</section>
+
+<section class="properties container" id="properties">
+  <div class="heading">
+    <span>Properties</span>
+    <h2>Our Featured Properties</h2>
+    <p>Lorem ipsum dolor sit amet consectetur <br> adipisicing elit. Recusandae, id.</p>
+  </div>
+
+  <div class="properties-container container">
+    @for (house of houses(); track house.id) {
+      <a class="box" [routerLink]="['/property', house.id]">
+        <img [src]="house.image" [alt]="house.name">
+        <h3>KES {{ house.price | number }}</h3>
+        <div class="content">
+          <div class="text">
+            <h3>{{ house.name }}</h3>
+            <p>{{ house.location }}</p>
+          </div>
+          <div class="icon">
+            <i class="bx bx-bed"><span>{{ house.bedrooms }}</span></i>
+            <i class="bx bx-bath"><span>{{ house.bathrooms }}</span></i>
+          </div>
+        </div>
+      </a>
+    }
+  </div>
+</section>
+
+<section class="newsletter container">
+  <h2>Have Questions in Mind? <br>Let us help you</h2>
+  <form (ngSubmit)="sendEmail()">
+    <input type="email" name="email" id="email-box" [(ngModel)]="email" placeholder="youremail@gmail.com" required>
+    <input type="submit" value="Send" class="btn">
+  </form>
+  @if (message()) {
+    <p [class]="isError() ? 'error' : 'success'">{{ message() }}</p>
+  }
+</section>
+
+<app-footer />

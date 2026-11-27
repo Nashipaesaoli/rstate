@@ -1,0 +1,5 @@
+.properties-container a.box {
+    display: block;
+    color: inherit;
+    cursor: pointer;
+}
